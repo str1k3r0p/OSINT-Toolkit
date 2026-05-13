@@ -1,16 +1,15 @@
 # OSINT Toolkit - Advanced Search Engine
 
-![OSINT Toolkit Logo Placeholder](https://via.placeholder.com/150/2563eb/ffffff?text=OSINT+Toolkit)
 
-Welcome to the **OSINT Toolkit**, an advanced open-source intelligence search engine designed to streamline information gathering for bug bounty hunters, security researchers, and OSINT investigators.
+**OSINT Toolkit**, is an advanced open-source osint platoform designed to streamline information gathering for bug bounty hunters, security researchers, and OSINT investigators.
 
 ## Features
 
-- 🛡️ **Bug Bounty Dork Generator**: Generate comprehensive vulnerability scanning dorks for any domain. Features 25 specific footprinting categories including SQLi, XSS, RCE, SSRF, Cloud Misconfigurations, Subdomain Takeovers, and more.
-- 👥 **People Search Profiler**: Cross-reference identities across public databases, document leaks, and social media footprints.
-- 📧 **Email Exposure Scanner**: Scan domains and individual email addresses across pastebins, breached databases, and source code repositories for exposed credentials.
-- 🖼️ **Reverse Image Forensics**: Easily access top-tier facial recognition AI, Error Level Analysis (ELA) tools, EXIF metadata extractors, and satellite geolocation services.
-- ⚡ **Clean & Responsive UI**: A professional SaaS-style, light-mode interface with a single-column layout that ensures complete dork visibility without clipping or awkward wrapping.
+- **Bug Bounty Dork Generator**: Generate comprehensive vulnerability scanning dorks for any domain. Features 25 specific footprinting categories including SQLi, XSS, RCE, SSRF, Cloud Misconfigurations, Subdomain Takeovers, and more.
+- **People Search Profiler**: Cross-reference identities across public databases, document leaks, and social media footprints.
+- **Email Exposure Scanner**: Scan domains and individual email addresses across pastebins, breached databases, and source code repositories for exposed credentials.
+- **Reverse Image Forensics**: Easily access top-tier facial recognition AI, Error Level Analysis (ELA) tools, EXIF metadata extractors, and satellite geolocation services.
+- **Clean & Responsive UI**: A professional SaaS-style, light-mode interface with a single-column layout that ensures complete dork visibility without clipping or awkward wrapping.
 
 ## Usage
 
