@@ -19,8 +19,7 @@ Simply open `index.html` in your modern web browser. No backend server or depend
 
 ## Author
 
-Developed by **Str1k3r0p** - Founder & Lead Security Researcher
-
+Developed by **Str1k3r0p** 
 - **GitHub Profile**: [github.com/str1k3r0p](https://github.com/str1k3r0p)
 - **LinkedIn**: [Connect with me](https://www.linkedin.com/in/ceh-afaq/)
 - **Repository**: [Star this repo!](https://github.com/str1k3r0p/OSINT-Toolkit)
