@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Advanced Search Toolkit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              'mono': ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              primary: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                900: '#1e3a8a',
+              },
+              surface: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+              }
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="font-sans bg-surface-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4">
+                <a href="#" id="home-logo" class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center text-white shadow-md group-hover:bg-primary-700 transition-colors">
+                        <i class="fas fa-search-location text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-900 tracking-tight group-hover:text-primary-700 transition-colors">OSINT Toolkit</h1>
+                        <p class="text-xs text-slate-500 font-medium tracking-wide uppercase">Advanced Search Engine</p>
+                    </div>
+                </a>
+                
+                <div class="flex flex-wrap justify-center gap-2 mt-4 md:mt-0">
+                    <button id="home-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 bg-primary-50 text-primary-700 shadow-sm border border-primary-100 flex items-center gap-2">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                    <button id="bug-bounty-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-shield-alt"></i> Bug Bounty
+                    </button>
+                    <button id="people-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-users"></i> People Search
+                    </button>
+                    <button id="email-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Email Search
+                    </button>
+                    <button id="image-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-image"></i> Image Search
+                    </button>
+                    <button id="about-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-info-circle"></i> About
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Home Section -->
+        <div id="home-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12 block animate-fade-in text-center">
+            <div class="max-w-3xl mx-auto">
+                <div class="w-20 h-20 bg-primary-50 rounded-2xl flex items-center justify-center text-primary-600 shadow-inner border border-primary-100 mx-auto mb-6">
+                    <i class="fas fa-globe-americas text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Welcome to OSINT Toolkit</h2>
+                <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                    An advanced open-source intelligence search engine designed to streamline information gathering. Utilize robust Google Dorks, scan for exposed emails, footprint public profiles, and access advanced image forensics tools all from a single interface.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
+                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
+                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Bug Bounty</h4>
+                            <p class="text-sm text-slate-500 mt-1">Generate comprehensive vulnerability scanning dorks for any domain.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
+                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-users"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">People Search</h4>
+                            <p class="text-sm text-slate-500 mt-1">Cross-reference social media, public records, and document leaks.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
+                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Email Exposure</h4>
+                            <p class="text-sm text-slate-500 mt-1">Find exposed credentials across pastebins and compromised databases.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
+                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-image"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Image Forensics</h4>
+                            <p class="text-sm text-slate-500 mt-1">Analyze metadata, use facial recognition, and verify image authenticity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 border-t border-slate-200 pt-8">
+                    <a href="https://github.com/str1k3r0p/OSINT-Toolkit" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fab fa-github text-lg"></i> Star on GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/ceh-afaq/" target="_blank" class="bg-[#0A66C2] hover:bg-[#004182] text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fab fa-linkedin text-lg"></i> Connect on LinkedIn
+                    </a>
+                    <a href="https://www.buymeacoffee.com/str1k3r0p" target="_blank" class="bg-[#FFDD00] hover:bg-[#FFC400] text-slate-900 font-medium py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-coffee text-lg"></i> Buy Me a Coffee
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bug Bounty Section -->
+        <div id="bug-bounty-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Bug Bounty Dork Generator</h2>
+                <p class="text-slate-500 text-sm">Discover potential vulnerabilities and exposed assets for a target domain.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="relative flex items-center w-full">
+                    <i class="fas fa-globe absolute left-4 text-slate-400"></i>
+                    <input type="text" id="domain-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm shadow-inner" placeholder="Enter target domain (e.g., example.com)">
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generateBugBountyDorks()">
+                        <i class="fas fa-search"></i> Generate Dorks
+                    </button>
+                </div>
+            </div>
+            
+            <div id="bug-bounty-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Compiling vulnerability dorks...</p>
+            </div>
+            
+            <div id="bug-bounty-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-list-ul text-primary-600"></i> Results for: <span id="domain-display" class="font-mono text-primary-700 bg-primary-50 px-2 py-0.5 rounded"></span>
+                    </h3>
+                </div>
+                <!-- 1 COLUMN LAYOUT -->
+                <div id="bug-bounty-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
+        <!-- People Search Section -->
+        <div id="people-search-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">People Search Profiler</h2>
+                <p class="text-slate-500 text-sm">Footprint identities across public databases, social media, and document leaks.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="relative flex items-center w-full">
+                        <i class="fas fa-user absolute left-4 text-slate-400"></i>
+                        <input type="text" id="name-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm" placeholder="Target Name (e.g., John Doe)">
+                    </div>
+                    <div class="relative flex items-center w-full">
+                        <i class="fas fa-envelope absolute left-4 text-slate-400"></i>
+                        <input type="text" id="people-email-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm" placeholder="Email (optional)">
+                    </div>
+                    <div class="relative flex items-center w-full">
+                        <i class="fas fa-map-marker-alt absolute left-4 text-slate-400"></i>
+                        <input type="text" id="location-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm" placeholder="Location (optional)">
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generatePeopleSearchDorks()">
+                        <i class="fas fa-search"></i> Discover Profiles
+                    </button>
+                </div>
+            </div>
+
+            <div id="people-search-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Aggregating identity footprint...</p>
+            </div>
+
+            <div id="people-search-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-address-card text-primary-600"></i> Profiles for: <span id="people-display" class="font-mono text-primary-700 bg-primary-50 px-2 py-0.5 rounded"></span>
+                    </h3>
+                </div>
+                <!-- 1 COLUMN LAYOUT -->
+                <div id="people-search-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
+        <!-- Email Search Section -->
+        <div id="email-search-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Email Exposure Scanner</h2>
+                <p class="text-slate-500 text-sm">Scan pastebins, repositories, and documents for compromised email addresses or domains.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="relative flex items-center w-full">
+                    <i class="fas fa-at absolute left-4 text-slate-400"></i>
+                    <input type="text" id="email-target-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm shadow-inner" placeholder="Target Email (e.g., test@example.com) or Domain">
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generateEmailSearchDorks()">
+                        <i class="fas fa-search"></i> Scan Exposures
+                    </button>
+                </div>
+            </div>
+
+            <div id="email-search-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Scanning databases...</p>
+            </div>
+
+            <div id="email-search-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-envelope-open-text text-primary-600"></i> Exposure Data for: <span id="email-display" class="font-mono text-primary-700 bg-primary-50 px-2 py-0.5 rounded"></span>
+                    </h3>
+                </div>
+                <!-- 1 COLUMN LAYOUT -->
+                <div id="email-search-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
+        <!-- Image Search Section -->
+        <div id="image-search-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Reverse Image Forensics</h2>
+                <p class="text-slate-500 text-sm">Utilize facial recognition, satellite matching, and advanced metadata forensics tools.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="w-full border-2 border-dashed border-slate-300 hover:border-primary-500 rounded-xl p-10 bg-surface-50 hover:bg-primary-50 transition-colors relative group cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 group-hover:text-primary-500 mb-3 transition-colors"></i>
+                    <p class="text-slate-600 font-medium mb-1">Click or drag & drop an image</p>
+                    <p class="text-slate-400 text-xs">Supports JPG, PNG, WEBP</p>
+                    <input type="file" id="image-upload" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" onchange="previewImage(event)">
+                    
+                    <div class="mt-6 hidden flex justify-center w-full" id="image-preview-container">
+                        <img id="image-preview" src="" alt="Preview" class="max-h-48 rounded-lg shadow-sm border border-slate-200">
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generateImageSearchLinks()">
+                        <i class="fas fa-microscope"></i> Access Forensic Tools
+                    </button>
+                </div>
+            </div>
+
+            <div id="image-search-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Loading forensic modules...</p>
+            </div>
+
+            <div id="image-search-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-toolbox text-primary-600"></i> Available Forensic Modules
+                    </h3>
+                </div>
+                <p class="text-sm text-slate-500 mb-4 bg-yellow-50 text-yellow-800 p-3 rounded border border-yellow-200 flex gap-2 items-start"><i class="fas fa-info-circle mt-0.5"></i> Note: For external modules, you may need to manually re-upload the image on the corresponding website due to browser security restrictions.</p>
+                <!-- 1 COLUMN LAYOUT -->
+                <div id="image-search-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">The Security Team</h2>
+                <p class="text-slate-500 text-sm">Researcher dedicated to OSINT and Vulnerability Discovery.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <!-- Founder Card -->
+                <div class="bg-surface-50 rounded-xl border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col sm:flex-row items-center gap-6 mb-6 pb-6 border-b border-slate-200">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-200 text-primary-600 text-3xl">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-2xl font-bold text-slate-800">Str1k3r0p</h3>
+                            <p class="text-sm text-primary-600 font-medium">Founder & Lead Security Researcher</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 text-center sm:text-left">
+                        A veteran in cybersecurity with over 4 years of experience in vulnerability assessments. My approach combines advanced automation with creative manual techniques to uncover security issues that conventional methods often miss. Currently focusing on OSINT toolkits and robust security integrations.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4 mt-6">
+                        <a href="https://github.com/str1k3r0p" target="_blank" class="text-slate-600 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 px-4 py-2 rounded-md font-medium text-sm transition-colors flex items-center justify-center gap-2">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                        <a href="https://www.linkedin.com/in/ceh-afaq/" target="_blank" class="text-[#0A66C2] hover:text-[#004182] bg-white border border-slate-200 hover:border-[#0A66C2] px-4 py-2 rounded-md font-medium text-sm transition-colors flex items-center justify-center gap-2">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 px-6 py-4 rounded-lg shadow-xl text-sm z-50 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none flex items-center gap-3 font-medium bg-slate-900 text-white">
+        <i class="fas fa-info-circle text-primary-400" id="toast-icon"></i>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="utils.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
