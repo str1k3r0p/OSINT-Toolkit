@@ -1,7 +1,4 @@
-# OSINT Toolkit - Advanced Search Engine
-
-
-**OSINT Toolkit**, is an advanced open-source osint platoform designed to streamline information gathering for bug bounty hunters, security researchers, and OSINT investigators.
+**OSINT Toolkit**, is an open-source osint platoform designed to streamline information gathering for bug bounty hunters, security researchers, and OSINT investigators.
 
 ## Features
 
