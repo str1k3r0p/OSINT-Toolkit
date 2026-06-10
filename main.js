@@ -2,30 +2,25 @@
 
 // --- Navigation ---
 function handleNavigation(targetId, clickedElement) {
-    // Reset all links
     document.querySelectorAll('.nav-link').forEach(l => {
         l.classList.remove('bg-primary-50', 'text-primary-700', 'border', 'border-primary-100', 'shadow-sm');
         l.classList.add('text-slate-600', 'hover:bg-slate-50', 'hover:text-slate-900');
     });
     
-    // Hide all sections
     document.querySelectorAll('.tool-section').forEach(s => {
         s.classList.remove('block', 'animate-fade-in');
         s.classList.add('hidden');
     });
     
-    // Set active link styles (if it's a standard nav link)
     if (clickedElement && clickedElement.classList.contains('nav-link')) {
         clickedElement.classList.remove('text-slate-600', 'hover:bg-slate-50', 'hover:text-slate-900');
         clickedElement.classList.add('bg-primary-50', 'text-primary-700', 'border', 'border-primary-100', 'shadow-sm');
     } else if (targetId === 'home-section') {
-        // If logo was clicked, manually highlight the home link
         const homeLink = document.getElementById('home-link');
         homeLink.classList.remove('text-slate-600', 'hover:bg-slate-50', 'hover:text-slate-900');
         homeLink.classList.add('bg-primary-50', 'text-primary-700', 'border', 'border-primary-100', 'shadow-sm');
     }
     
-    // Show target section
     const section = document.getElementById(targetId);
     section.classList.remove('hidden');
     section.classList.add('block', 'animate-fade-in');
@@ -39,7 +34,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Logo acts as home link
 document.getElementById('home-logo').addEventListener('click', function(e) {
     e.preventDefault();
     handleNavigation('home-section', null);
@@ -76,7 +70,7 @@ function generateBugBountyDorks() {
             
             category.dorks.forEach(dork => {
                 const query = dork.replace(/{domain}/g, domain);
-                linksContainer.appendChild(createSearchLink(query, query.startsWith("https://")));
+                linksContainer.appendChild(createSearchLink(query, query.startsWith("https://"), "Google"));
             });
             
             card.appendChild(linksContainer);
@@ -84,6 +78,93 @@ function generateBugBountyDorks() {
         });
     }, 600);
 }
+
+function generateShodanDorks() {
+    const targetInput = document.getElementById('shodan-target-input').value.trim();
+    const resultsContainer = document.getElementById('shodan-results-container');
+    const resultsDiv = document.getElementById('shodan-results');
+    const loading = document.getElementById('shodan-loading');
+    
+    resultsDiv.innerHTML = ''; 
+    resultsContainer.classList.add('hidden');
+    loading.classList.remove('hidden');
+    
+    setTimeout(() => {
+        loading.classList.add('hidden');
+        resultsContainer.classList.remove('hidden');
+        
+        shodanCategories.forEach(category => {
+            const card = createCategoryCard(category);
+            const linksContainer = document.createElement('div');
+            linksContainer.className = 'flex flex-col gap-3 mt-4';
+            
+            category.dorks.forEach(dork => {
+                let query = dork;
+                if (targetInput) {
+                    query = `${targetInput} ${dork}`;
+                }
+                linksContainer.appendChild(createSearchLink(query, false, "Shodan"));
+            });
+            
+            card.appendChild(linksContainer);
+            resultsDiv.appendChild(card);
+        });
+    }, 600);
+}
+
+function generateFofaDorks() {
+    const targetInput = document.getElementById('fofa-target-input').value.trim();
+    const resultsContainer = document.getElementById('fofa-results-container');
+    const resultsDiv = document.getElementById('fofa-results');
+    const loading = document.getElementById('fofa-loading');
+    
+    resultsDiv.innerHTML = ''; 
+    resultsContainer.classList.add('hidden');
+    loading.classList.remove('hidden');
+    
+    setTimeout(() => {
+        loading.classList.add('hidden');
+        resultsContainer.classList.remove('hidden');
+        
+        fofaCategories.forEach(category => {
+            const card = createCategoryCard(category);
+            const linksContainer = document.createElement('div');
+            linksContainer.className = 'flex flex-col gap-3 mt-4';
+            
+            category.dorks.forEach(dork => {
+                let query = dork.replace(/{target}/g, targetInput || "example.com");
+                if (targetInput && !dork.includes("{target}")) {
+                    query = `(${dork}) && (${buildFofaTargetScope(targetInput)})`;
+                }
+                linksContainer.appendChild(createSearchLink(query, false, "FOFA"));
+            });
+            
+            card.appendChild(linksContainer);
+            resultsDiv.appendChild(card);
+        });
+    }, 600);
+}
+
+function buildFofaTargetScope(target) {
+    if (/[=()]/.test(target) || target.includes("&&") || target.includes("||")) {
+        return target;
+    }
+
+    const escapedTarget = target.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+    const isIpAddress = /^(?:\d{1,3}\.){3}\d{1,3}$/.test(target);
+    const looksLikeDomain = /^(?:[a-z0-9-]+\.)+[a-z]{2,}$/i.test(target);
+
+    if (isIpAddress) {
+        return `ip="${escapedTarget}"`;
+    }
+
+    if (looksLikeDomain) {
+        return `domain="${escapedTarget}" || host="${escapedTarget}" || cert.subject="${escapedTarget}"`;
+    }
+
+    return `title="${escapedTarget}" || body="${escapedTarget}" || header="${escapedTarget}"`;
+}
+
 
 function generatePeopleSearchDorks() {
     const nameInput = document.getElementById('name-input').value.trim();
@@ -122,7 +203,7 @@ function generatePeopleSearchDorks() {
                 }
                 query = query.replace(/{location}/g, locationInput);
 
-                linksContainer.appendChild(createSearchLink(query));
+                linksContainer.appendChild(createSearchLink(query, false, "Google"));
             });
             
             if(linksContainer.children.length > 0) {
@@ -176,7 +257,7 @@ function generateEmailSearchDorks() {
                 query = query.replace(/{email}/g, emailTarget);
                 query = query.replace(/{target}/g, isEmail ? emailTarget.split('@')[0] : emailTarget);
                 
-                linksContainer.appendChild(createSearchLink(query));
+                linksContainer.appendChild(createSearchLink(query, false, "Google"));
             });
             
             if(linksContainer.children.length > 0) {
@@ -224,7 +305,7 @@ function generateImageSearchLinks() {
             linksContainer.className = 'flex flex-col gap-3 mt-4';
             
             category.engines.forEach(engine => {
-                const link = createSearchLink(engine.url, true);
+                const link = createSearchLink(engine.url, true, engine.name);
                 link.innerHTML = `<span class="font-medium">${engine.name}</span> <i class="fas fa-external-link-alt ml-2 opacity-50"></i>`;
                 link.className = 'flex justify-between items-center w-full break-all text-slate-600 hover:text-primary-700 bg-white border border-slate-200 hover:border-primary-300 rounded-lg p-3 text-sm transition-colors shadow-sm hover:shadow';
                 
@@ -239,6 +320,5 @@ function generateImageSearchLinks() {
 
 // Initial Setup
 window.addEventListener('DOMContentLoaded', () => {
-    // Home section is visible by default in HTML
     handleNavigation('home-section', document.getElementById('home-link'));
 });
