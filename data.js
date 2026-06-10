@@ -216,6 +216,114 @@ const bugBountyCategories = [
             "site:{domain} intext:\"Citrix Gateway\" intitle:\"Login\"",
             "site:{domain} intext:\"FortiGate\" OR intext:\"FortiClient\" intitle:\"Login\""
         ]
+    },
+    {
+        name: "Source Code & Repository Secrets",
+        icon: "fab fa-github",
+        dorks: [
+            "site:github.com \"{domain}\" \"password\"",
+            "site:github.com \"{domain}\" \"api_key\" OR \"apikey\"",
+            "site:github.com \"{domain}\" \"secret_key\" OR \"client_secret\"",
+            "site:github.com \"{domain}\" \"access_token\" OR \"refresh_token\"",
+            "site:github.com \"{domain}\" \"AWS_ACCESS_KEY_ID\"",
+            "site:github.com \"{domain}\" \"PRIVATE KEY\"",
+            "site:github.com \"{domain}\" filename:.env",
+            "site:github.com \"{domain}\" filename:config",
+            "site:github.com \"{domain}\" filename:credentials",
+            "site:gitlab.com \"{domain}\" \"password\" OR \"token\"",
+            "site:bitbucket.org \"{domain}\" \"password\" OR \"token\"",
+            "site:gist.github.com \"{domain}\" \"secret\" OR \"token\""
+        ]
+    },
+    {
+        name: "CI/CD & DevOps Artifacts",
+        icon: "fas fa-code-branch",
+        dorks: [
+            "site:{domain} inurl:.github/workflows filetype:yml",
+            "site:{domain} inurl:.gitlab-ci.yml",
+            "site:{domain} inurl:Jenkinsfile",
+            "site:{domain} inurl:circleci filetype:yml",
+            "site:{domain} inurl:travis.yml",
+            "site:{domain} inurl:azure-pipelines.yml",
+            "site:{domain} inurl:docker-compose.yml",
+            "site:{domain} inurl:kustomization.yaml",
+            "site:{domain} inurl:helm values.yaml",
+            "site:{domain} inurl:terraform.tfstate",
+            "site:{domain} filetype:tfvars",
+            "site:{domain} intext:\"CI_JOB_TOKEN\" OR intext:\"GITHUB_TOKEN\""
+        ]
+    },
+    {
+        name: "Backups, Dumps & Archives",
+        icon: "fas fa-archive",
+        dorks: [
+            "site:{domain} ext:sql OR ext:db OR ext:sqlite",
+            "site:{domain} ext:bak OR ext:backup OR ext:old",
+            "site:{domain} ext:zip OR ext:tar OR ext:gz OR ext:7z",
+            "site:{domain} inurl:backup intitle:\"index of\"",
+            "site:{domain} inurl:dump intitle:\"index of\"",
+            "site:{domain} inurl:database intitle:\"index of\"",
+            "site:{domain} \"phpMyAdmin SQL Dump\"",
+            "site:{domain} \"-- MySQL dump\"",
+            "site:{domain} \"PostgreSQL database dump\"",
+            "site:{domain} \"BEGIN RSA PRIVATE KEY\"",
+            "site:{domain} \"BEGIN OPENSSH PRIVATE KEY\"",
+            "site:{domain} \"BEGIN PGP PRIVATE KEY BLOCK\""
+        ]
+    },
+    {
+        name: "API Docs, Specs & Schema Leaks",
+        icon: "fas fa-project-diagram",
+        dorks: [
+            "site:{domain} inurl:swagger.json",
+            "site:{domain} inurl:openapi.json",
+            "site:{domain} inurl:api-docs",
+            "site:{domain} intitle:\"Swagger UI\"",
+            "site:{domain} intitle:\"ReDoc\"",
+            "site:{domain} inurl:graphql intitle:\"GraphQL Playground\"",
+            "site:{domain} intitle:\"GraphiQL\"",
+            "site:{domain} filetype:json \"paths\" \"openapi\"",
+            "site:{domain} filetype:yaml \"openapi:\"",
+            "site:{domain} \"__schema\" \"queryType\"",
+            "site:{domain} \"apollo\" \"introspection\"",
+            "site:{domain} inurl:postman_collection"
+        ]
+    },
+    {
+        name: "Runtime Logs & Debug Output",
+        icon: "fas fa-clipboard-list",
+        dorks: [
+            "site:{domain} ext:log",
+            "site:{domain} inurl:logs intitle:\"index of\"",
+            "site:{domain} \"Traceback (most recent call last)\"",
+            "site:{domain} \"Laravel Framework\" \"APP_DEBUG\"",
+            "site:{domain} \"Symfony Profiler\"",
+            "site:{domain} \"Werkzeug powered traceback interpreter\"",
+            "site:{domain} \"Django administration\" \"DEBUG\"",
+            "site:{domain} \"stack trace\" \"at \"",
+            "site:{domain} \"Exception Details:\"",
+            "site:{domain} \"SQLSTATE[\"",
+            "site:{domain} \"ORA-\" \"SQLException\"",
+            "site:{domain} \"Warning: require\" OR \"Warning: include\""
+        ]
+    },
+    {
+        name: "Cloud Buckets & CDN Origins",
+        icon: "fas fa-cloud-upload-alt",
+        dorks: [
+            "site:s3.amazonaws.com \"{domain}\"",
+            "site:amazonaws.com \"{domain}\" \"AccessDenied\"",
+            "site:storage.googleapis.com \"{domain}\"",
+            "site:blob.core.windows.net \"{domain}\"",
+            "site:digitaloceanspaces.com \"{domain}\"",
+            "site:cloudfront.net \"{domain}\"",
+            "site:firebaseio.com \"{domain}\"",
+            "site:firebasestorage.googleapis.com \"{domain}\"",
+            "site:azureedge.net \"{domain}\"",
+            "site:workers.dev \"{domain}\"",
+            "site:pages.dev \"{domain}\"",
+            "site:vercel.app \"{domain}\" OR site:netlify.app \"{domain}\""
+        ]
     }
 ];
 
@@ -382,6 +490,442 @@ const imageSearchEngines = [
             { name: "Sentinel Hub (Historical Satellite Imagery)", url: "https://apps.sentinel-hub.com/eo-browser/" },
             { name: "SunCalc (Calculate time based on shadows)", url: "https://www.suncalc.org/" },
             { name: "Overpass Turbo (Search OSM for matching landmarks)", url: "https://overpass-turbo.eu/" }
+        ]
+    }
+];
+
+const shodanCategories = [
+    {
+        name: "Webcams, NVRs & Physical Security",
+        icon: "fas fa-camera",
+        dorks: [
+            "\"Server: Hikvision\"",
+            "app:\"HIKVISION\"",
+            "\"Server: Dahua\"",
+            "product:\"axis network camera\"",
+            "\"Network Video Recorder Login\"",
+            "\"Welcome to Network Camera FTP Server\"",
+            "title:\"netcam\"",
+            "\"Server: webcamXP\"",
+            "\"NUUO\"",
+            "title:\"FLIR\"",
+            "rtsp port:554",
+            "html:\"thisIDRACText\""
+        ]
+    },
+    {
+        name: "Databases, Caches & Message Queues",
+        icon: "fas fa-database",
+        dorks: [
+            "product:\"MongoDB\"",
+            "product:\"Elasticsearch\" port:\"9200\"",
+            "\"ElasticSearch\"",
+            "product:\"Redis\"",
+            "product:\"Memcached\" port:\"11211\"",
+            "cpe:\"cpe:2.3:a:apache:cassandra\"",
+            "html:\"Couchbase Sync Gateway\"",
+            "http.component:\"Atlassian Confluence\"",
+            "product:\"NATS Server\"",
+            "rocketmq port:\"9876\"",
+            "http.title:\"Apache kafka\"",
+            "product:\"PostgreSQL\" port:\"5432\"",
+            "product:\"MySQL\" port:\"3306\""
+        ]
+    },
+    {
+        name: "Admin Panels & Dev Dashboards",
+        icon: "fas fa-window-restore",
+        dorks: [
+            "title:\"Jenkins\"",
+            "http.title:\"GitLab Enterprise Edition\"",
+            "product:\"Grafana\"",
+            "http.title:\"Prometheus Time Series\"",
+            "http.title:\"Nexus Repository Manager\"",
+            "http.title:\"phpMyAdmin\"",
+            "http.title:\"Adminer\"",
+            "http.title:\"pgAdmin\"",
+            "title:\"Portainer\"",
+            "title:\"Rancher\"",
+            "http.title:\"Supabase Studio\"",
+            "http.title:\"Open WebUI\"",
+            "http.title:\"Metabase\" http.html:\"setup\"",
+            "http.title:\"NocoDB\""
+        ]
+    },
+    {
+        name: "AI, LLM & Data Science Apps",
+        icon: "fas fa-brain",
+        dorks: [
+            "http.html:\"Ollama\" port:11434",
+            "http.title:\"Open WebUI\"",
+            "http.title:\"ComfyUI\"",
+            "http.title:\"Flowise\"",
+            "html:\"__gradio_mode__\"",
+            "http.title:\"Dify\"",
+            "http.html:\"Langflow\"",
+            "http.html:\"qdrant - vector search engine\"",
+            "http.title:\"Weaviate Console\"",
+            "http.title:\"Jupyter\"",
+            "http.title:\"Ray Dashboard\"",
+            "http.title:\"MLflow\""
+        ]
+    },
+    {
+        name: "Industrial Control & OT",
+        icon: "fas fa-industry",
+        dorks: [
+            "port:502 \"Modbus\"",
+            "port:102 \"S7\"",
+            "port:44818 \"Vendor ID: Rockwell Automation/Allen-Bradley\"",
+            "port:47808 \"BACnet\"",
+            "port:4786 \"Smart Install\"",
+            "title:\"SIMATIC 300\"",
+            "title:\"WAGO Ethernet Web-based Management\"",
+            "title:\"Phoenix Contact - CHARX\"",
+            "http.html:\"Delta Controls ORCAview\"",
+            "http.title:\"Nordex Control - Wind Farm Portal\"",
+            "http.html:\"OpenPLC\"",
+            "http.html:\"RIoT Controller\""
+        ]
+    },
+    {
+        name: "Network Edge, VPN & Firewalls",
+        icon: "fas fa-network-wired",
+        dorks: [
+            "\"Server: Mikrotik\"",
+            "\"Cisco IOS\" port:\"23\"",
+            "title:\"pfSense - Login\"",
+            "\"Server: FortiGate\"",
+            "ssl:\"cn=fortiweb\"",
+            "http.title:\"ivanti connect secure\"",
+            "http.title:\"citrix gateway\" || title:\"netscaler gateway\"",
+            "http.title:\"OpenVPN Access Server\"",
+            "http.html:\"SonicWall\" html:\"SMA\"",
+            "http.title:\"Cisco Webex Meetings\"",
+            "title:\"Aruba\"",
+            "title:\"VeloCloud\""
+        ]
+    },
+    {
+        name: "Remote Access & Management",
+        icon: "fas fa-desktop",
+        dorks: [
+            "port:\"3389\"",
+            "product:\"vnc\"",
+            "product:\"WinRM\"",
+            "port:4899 product:\"Famatech Radmin\"",
+            "product:\"Java Debug Wire Protocol\"",
+            "\"rlogin\"",
+            "\"telnet\" port:23",
+            "product:\"check_mk\"",
+            "http.title:\"Meshery\"",
+            "http.title:\"Remotely\"",
+            "http.title:\"ThinVNC\"",
+            "http.title:\"RustDesk API Admin\""
+        ]
+    },
+    {
+        name: "File Transfer, Storage & Object Buckets",
+        icon: "fas fa-folder-open",
+        dorks: [
+            "product:\"FileZilla Server\"",
+            "product:\"Pure-FTPd\"",
+            "product:\"ProFTPD\"",
+            "product:\"Microsoft ftpd\"",
+            "\"vsFTPd\"",
+            "\"Serv-U FTP Server\"",
+            "\"Hummingbird Ltd. (HCLFTPD)\"",
+            "\"NET Disk FTP Server ready\"",
+            "\"storage.googleapis.com\"",
+            "ssl.cert.subject.cn:\"cloud-object-storage.appdomain.cloud\"",
+            "\"x-amz-meta-s3cmd-attrs\"",
+            "nfs"
+        ]
+    },
+    {
+        name: "Cloud, Containers & Orchestration",
+        icon: "fas fa-cloud",
+        dorks: [
+            "http.html:\"Kubernetes Dashboard\"",
+            "http.title:\"Rancher\"",
+            "http.title:\"Traefik\"",
+            "http.html:\"Proxmox = {\"",
+            "http.title:\"Cockpit\"",
+            "http.html:\"Docker\"",
+            "http.html:\"Portainer\"",
+            "http.html:\"Argo CD\"",
+            "http.html:\"Harbor\"",
+            "http.html:\"Consul\"",
+            "product:\"Consul\"",
+            "http.html:\"Vault\""
+        ]
+    },
+    {
+        name: "CMS, Frameworks & App Servers",
+        icon: "fas fa-code",
+        dorks: [
+            "http.component:\"wordpress\"",
+            "http.component:\"drupal\"",
+            "http.component:\"Joomla\"",
+            "http.component:\"Magento\"",
+            "http.component:\"django\"",
+            "http.component:\"Flask\"",
+            "http.component:\"Laravel\"",
+            "http.component:\"Next.js\"",
+            "cpe:\"cpe:2.3:a:apache:tomcat\"",
+            "port:8009 product:\"Apache Tomcat\"",
+            "product:\"oracle weblogic\"",
+            "http.title:\"Apache Unomi\"",
+            "http.html:\"Apache OFBiz\""
+        ]
+    },
+    {
+        name: "Secrets, Configs & Exposed Files",
+        icon: "fas fa-key",
+        dorks: [
+            "html:\"access_tokens.db\"",
+            "html:\"credentials.db\"",
+            "html:\"anonymous-cli-metrics.json\"",
+            "html:\"auth.json\"",
+            "html:\"authorization token is empty\"",
+            "html:\"cloud-config.yml\"",
+            "html:\"docker-compose.yml\"",
+            "html:\"terraform.tfstate\"",
+            "html:\".env\"",
+            "html:\"settings.py\"",
+            "html:\"redis.conf\"",
+            "html:\"sftp.json\"",
+            "html:\".vscode\" html:\"Directory listing for /\""
+        ]
+    },
+    {
+        name: "Vulnerability & CVE Hunting",
+        icon: "fas fa-bug",
+        dorks: [
+            "vuln:CVE-2023-40000",
+            "http.component:\"Apache Struts\"",
+            "http.title:\"Apache Tika\"",
+            "http.html:\"Apache Solr\"",
+            "http.html:\"Apache Airflow\"",
+            "http.html:\"Spring\" \"actuator\"",
+            "http.html:\"Werkzeug powered traceback interpreter\"",
+            "http.html:\"Struts Problem Report\"",
+            "http.title:\"GeoServer\"",
+            "http.html:\"phpinfo\"",
+            "http.html:\"log4j.properties\"",
+            "http.html:\"Server: Apache/\" \"centos\""
+        ]
+    },
+    {
+        name: "High-Signal Hash & Header Fingerprints",
+        icon: "fas fa-fingerprint",
+        dorks: [
+            "http.favicon.hash:-127886975",
+            "http.favicon.hash:-1379982221",
+            "http.favicon.hash:-1478287554",
+            "http.favicon.hash:-1950415971",
+            "http.favicon.hash:-2017596142",
+            "http.favicon.hash:-286484075 http.title:\"Open WebUI\"",
+            "http.favicon.hash:1011076161",
+            "http.favicon.hash:116323821",
+            "http.favicon.hash:1499876150",
+            "http.headers_hash:1985490094",
+            "\"X-Application-Context\"",
+            "\"X-Powered-By: PHP/\"",
+            "\"X-OWA-Version\""
+        ]
+    }
+];
+
+const fofaCategories = [
+    {
+        name: "C2 & Attack Infrastructure",
+        icon: "fas fa-skull-crossbones",
+        dorks: [
+            "protocol=\"cobaltstrike\"",
+            "app=\"CobaltStrike\"",
+            "body=\"Sliver\" && port=\"443\"",
+            "title=\"Empire\" && body=\"login\"",
+            "body=\"/api/v1/listener\" && body=\"teamserver\"",
+            "header=\"X-Powered-By: Express\" && port=\"8080\"",
+            "body=\"Havoc\" && title=\"Login\"",
+            "body=\"Mythic\" && title=\"Login\""
+        ]
+    },
+    {
+        name: "Admin Panels & Exposed Dashboards",
+        icon: "fas fa-window-restore",
+        dorks: [
+            "title=\"Jenkins\"",
+            "title=\"GitLab\" && body=\"users/sign_in\"",
+            "title=\"Grafana\"",
+            "title=\"Prometheus Time Series Collection\"",
+            "title=\"Kibana\"",
+            "title=\"Nexus Repository Manager\"",
+            "title=\"phpMyAdmin\"",
+            "title=\"Adminer\"",
+            "title=\"pgAdmin\"",
+            "title=\"Portainer\"",
+            "title=\"Rancher\"",
+            "title=\"RabbitMQ Management\""
+        ]
+    },
+    {
+        name: "AI, LLM & Modern App Surfaces",
+        icon: "fas fa-brain",
+        dorks: [
+            "title=\"Open WebUI\"",
+            "body=\"Ollama\" && port=\"11434\"",
+            "title=\"ComfyUI\"",
+            "title=\"Flowise\"",
+            "body=\"__gradio_mode__\"",
+            "title=\"Dify\"",
+            "body=\"Langflow\"",
+            "body=\"qdrant - vector search engine\"",
+            "title=\"Weaviate Console\"",
+            "title=\"Jupyter\"",
+            "title=\"Ray Dashboard\""
+        ]
+    },
+    {
+        name: "Web Frameworks, CMS & Plugins",
+        icon: "fas fa-code",
+        dorks: [
+            "app=\"WordPress\"",
+            "body=\"wp-content/themes\"",
+            "body=\"/wp-content/plugins/\"",
+            "app=\"Laravel\"",
+            "app=\"Joomla\"",
+            "app=\"Drupal\"",
+            "app=\"Magento\"",
+            "header=\"X-Generator: Ghost\"",
+            "body=\"__NEXT_DATA__\"",
+            "body=\"ng-version=\"",
+            "body=\"webpackJsonp\"",
+            "body=\"vite.config.js\""
+        ]
+    },
+    {
+        name: "Cloud Storage & Public Buckets",
+        icon: "fas fa-cloud",
+        dorks: [
+            "body=\"ListBucketResult\" && body=\"AmazonS3\"",
+            "body=\"NoSuchBucket\" && body=\"The specified bucket does not exist\"",
+            "body=\"storage.googleapis.com\"",
+            "body=\"blob.core.windows.net\"",
+            "body=\"firebaseio.com\"",
+            "body=\"firebasestorage.googleapis.com\"",
+            "body=\"cloudfront.net\"",
+            "body=\"x-amz-meta-s3cmd-attrs\"",
+            "body=\"AccessDenied\" && body=\"aws\"",
+            "cert.subject=\"{target}\""
+        ]
+    },
+    {
+        name: "Secrets, Configs & Source Exposure",
+        icon: "fas fa-key",
+        dorks: [
+            "body=\".env\" && body=\"APP_KEY\"",
+            "body=\"access_tokens.db\"",
+            "body=\"credentials.db\"",
+            "body=\"authorization token is empty\"",
+            "body=\"cloud-config.yml\"",
+            "body=\"docker-compose.yml\"",
+            "body=\"terraform.tfstate\"",
+            "body=\"redis.conf\"",
+            "body=\"sftp.json\"",
+            "body=\".git/config\"",
+            "body=\".vscode\" && title=\"Directory listing\"",
+            "body=\"BEGIN OPENSSH PRIVATE KEY\""
+        ]
+    },
+    {
+        name: "Databases & Middleware",
+        icon: "fas fa-database",
+        dorks: [
+            "app=\"MongoDB\"",
+            "app=\"ElasticSearch\"",
+            "app=\"Redis\"",
+            "app=\"PostgreSQL\"",
+            "app=\"MySQL\"",
+            "app=\"Memcached\"",
+            "app=\"Cassandra\"",
+            "app=\"RabbitMQ\"",
+            "app=\"Kafka\"",
+            "body=\"Couchbase Sync Gateway\"",
+            "body=\"NATS Server\"",
+            "body=\"RocketMQ\" && port=\"9876\""
+        ]
+    },
+    {
+        name: "Network Edge, VPN & Remote Access",
+        icon: "fas fa-network-wired",
+        dorks: [
+            "app=\"Fortinet-FortiGate\"",
+            "title=\"FortiWeb\"",
+            "title=\"pfSense\"",
+            "title=\"SonicWall\" && body=\"SMA\"",
+            "title=\"Citrix Gateway\" || title=\"NetScaler Gateway\"",
+            "title=\"OpenVPN Access Server\"",
+            "title=\"Pulse Connect Secure\"",
+            "title=\"Cisco\" && body=\"AnyConnect\"",
+            "title=\"MikroTik\"",
+            "protocol=\"rdp\"",
+            "protocol=\"vnc\"",
+            "protocol=\"ssh\""
+        ]
+    },
+    {
+        name: "Industrial Control & IoT",
+        icon: "fas fa-industry",
+        dorks: [
+            "protocol=\"modbus\"",
+            "port=\"502\" && body=\"Modbus\"",
+            "port=\"44818\" && body=\"Rockwell\"",
+            "title=\"SIMATIC\"",
+            "title=\"WAGO Ethernet Web-based Management\"",
+            "body=\"Delta Controls ORCAview\"",
+            "title=\"Phoenix Contact\"",
+            "title=\"HIKVISION\"",
+            "app=\"HIKVISION-Video-Security\"",
+            "title=\"Dahua\"",
+            "title=\"Network Video Recorder Login\"",
+            "body=\"rtsp://\""
+        ]
+    },
+    {
+        name: "Vulnerability Footprints",
+        icon: "fas fa-bug",
+        dorks: [
+            "body=\"Struts Problem Report\"",
+            "title=\"Apache Tika\"",
+            "body=\"Apache Solr\"",
+            "body=\"Apache Airflow\"",
+            "body=\"Werkzeug powered traceback interpreter\"",
+            "body=\"phpinfo()\"",
+            "body=\"Spring Boot Actuator\"",
+            "body=\"Swagger UI\" && body=\"Authorize\"",
+            "title=\"GeoServer\"",
+            "body=\"Telerik.Web.UI.WebResource.axd\"",
+            "body=\"Log4j\" || body=\"Log4Shell\""
+        ]
+    },
+    {
+        name: "Hash, Certificate & Asset Mapping",
+        icon: "fas fa-fingerprint",
+        dorks: [
+            "icon_hash=\"-127886975\"",
+            "icon_hash=\"-1379982221\"",
+            "icon_hash=\"-1478287554\"",
+            "icon_hash=\"-1950415971\"",
+            "icon_hash=\"-2017596142\"",
+            "body_hash=\"987654321\"",
+            "header_hash=\"-1122334455\"",
+            "cert.issuer=\"Let's Encrypt\"",
+            "cert.subject=\"{target}\"",
+            "cert=\"{target}\"",
+            "domain=\"{target}\"",
+            "host=\"{target}\""
         ]
     }
 ];
