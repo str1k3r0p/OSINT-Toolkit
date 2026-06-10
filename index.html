@@ -54,22 +54,28 @@
                 </a>
                 
                 <div class="flex flex-wrap justify-center gap-2 mt-4 md:mt-0">
-                    <button id="home-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 bg-primary-50 text-primary-700 shadow-sm border border-primary-100 flex items-center gap-2">
+                    <button id="home-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 bg-primary-50 text-primary-700 shadow-sm border border-primary-100 flex items-center gap-2">
                         <i class="fas fa-home"></i> Home
                     </button>
-                    <button id="bug-bounty-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                    <button id="bug-bounty-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
                         <i class="fas fa-shield-alt"></i> Bug Bounty
                     </button>
-                    <button id="people-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-users"></i> People Search
+                    <button id="shodan-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-satellite-dish"></i> Shodan
                     </button>
-                    <button id="email-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-envelope"></i> Email Search
+                    <button id="fofa-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-eye"></i> FOFA
                     </button>
-                    <button id="image-search-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-image"></i> Image Search
+                    <button id="people-search-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-users"></i> People
                     </button>
-                    <button id="about-link" class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                    <button id="email-search-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button id="image-search-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-image"></i> Image
+                    </button>
+                    <button id="about-link" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2">
                         <i class="fas fa-info-circle"></i> About
                     </button>
                 </div>
@@ -77,50 +83,21 @@
         </div>
     </nav>
 
-    <main class="flex-grow container max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+    <main class="flex-grow container max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         
         <!-- Home Section -->
-        <div id="home-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12 block animate-fade-in text-center">
-            <div class="max-w-3xl mx-auto">
+        <div id="home-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-8 md:p-12 block animate-fade-in">
+            
+            <!-- Welcome Text -->
+            <div class="max-w-3xl mx-auto text-center">
                 <div class="w-20 h-20 bg-primary-50 rounded-2xl flex items-center justify-center text-primary-600 shadow-inner border border-primary-100 mx-auto mb-6">
                     <i class="fas fa-globe-americas text-4xl"></i>
                 </div>
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Welcome to OSINT Toolkit</h2>
                 <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                    An advanced open-source intelligence search engine designed to streamline information gathering. Utilize robust Google Dorks, scan for exposed emails, footprint public profiles, and access advanced image forensics tools all from a single interface.
+                    An advanced open-source intelligence search engine designed to streamline information gathering. Utilize robust Google Dorks, FOFA/Shodan mapping, scan for exposed emails, footprint public profiles, and access advanced image forensics tools all from a single interface.
                 </p>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
-                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
-                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-shield-alt"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">Bug Bounty</h4>
-                            <p class="text-sm text-slate-500 mt-1">Generate comprehensive vulnerability scanning dorks for any domain.</p>
-                        </div>
-                    </div>
-                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
-                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-users"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">People Search</h4>
-                            <p class="text-sm text-slate-500 mt-1">Cross-reference social media, public records, and document leaks.</p>
-                        </div>
-                    </div>
-                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
-                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">Email Exposure</h4>
-                            <p class="text-sm text-slate-500 mt-1">Find exposed credentials across pastebins and compromised databases.</p>
-                        </div>
-                    </div>
-                    <div class="p-5 border border-slate-200 rounded-lg bg-surface-50 flex items-start gap-4">
-                        <div class="bg-primary-100 text-primary-600 p-2 rounded-lg"><i class="fas fa-image"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">Image Forensics</h4>
-                            <p class="text-sm text-slate-500 mt-1">Analyze metadata, use facial recognition, and verify image authenticity.</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="flex flex-col sm:flex-row justify-center gap-4 border-t border-slate-200 pt-8">
                     <a href="https://github.com/str1k3r0p/OSINT-Toolkit" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
                         <i class="fab fa-github text-lg"></i> Star on GitHub
@@ -133,6 +110,7 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
         <!-- Bug Bounty Section -->
@@ -170,6 +148,77 @@
                 <div id="bug-bounty-results" class="grid grid-cols-1 gap-6"></div>
             </div>
         </div>
+
+        <!-- Shodan Section -->
+        <div id="shodan-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Shodan Asset Mapping</h2>
+                <p class="text-slate-500 text-sm">Search the world's first search engine for Internet-connected devices.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="relative flex items-center w-full">
+                    <i class="fas fa-satellite-dish absolute left-4 text-slate-400"></i>
+                    <input type="text" id="shodan-target-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm shadow-inner" placeholder="Optional: Target IP, Org, or keyword (e.g., org:'Google')">
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generateShodanDorks()">
+                        <i class="fas fa-search"></i> Generate Shodan Queries
+                    </button>
+                </div>
+            </div>
+            
+            <div id="shodan-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Compiling Shodan dorks...</p>
+            </div>
+            
+            <div id="shodan-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-list-ul text-primary-600"></i> Shodan Results
+                    </h3>
+                </div>
+                <div id="shodan-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
+        <!-- FOFA Section -->
+        <div id="fofa-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">FOFA Cyberspace Search</h2>
+                <p class="text-slate-500 text-sm">Map IT assets and hunt for specific threat infrastructure globally.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="relative flex items-center w-full">
+                    <i class="fas fa-eye absolute left-4 text-slate-400"></i>
+                    <input type="text" id="fofa-target-input" class="w-full pl-11 pr-4 py-3 bg-surface-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-shadow text-slate-800 placeholder-slate-400 font-mono text-sm shadow-inner" placeholder="Optional: Target Domain, IP, or cert (e.g., domain='example.com')">
+                </div>
+                
+                <div class="mt-6 flex justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5" onclick="generateFofaDorks()">
+                        <i class="fas fa-search"></i> Generate FOFA Queries
+                    </button>
+                </div>
+            </div>
+            
+            <div id="fofa-loading" class="hidden text-center my-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p class="text-slate-500 font-medium text-sm">Compiling FOFA syntax...</p>
+            </div>
+            
+            <div id="fofa-results-container" class="mt-12 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-list-ul text-primary-600"></i> FOFA Results
+                    </h3>
+                </div>
+                <div id="fofa-results" class="grid grid-cols-1 gap-6"></div>
+            </div>
+        </div>
+
 
         <!-- People Search Section -->
         <div id="people-search-section" class="tool-section bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 hidden">
@@ -212,7 +261,6 @@
                         <i class="fas fa-address-card text-primary-600"></i> Profiles for: <span id="people-display" class="font-mono text-primary-700 bg-primary-50 px-2 py-0.5 rounded"></span>
                     </h3>
                 </div>
-                <!-- 1 COLUMN LAYOUT -->
                 <div id="people-search-results" class="grid grid-cols-1 gap-6"></div>
             </div>
         </div>
@@ -248,7 +296,6 @@
                         <i class="fas fa-envelope-open-text text-primary-600"></i> Exposure Data for: <span id="email-display" class="font-mono text-primary-700 bg-primary-50 px-2 py-0.5 rounded"></span>
                     </h3>
                 </div>
-                <!-- 1 COLUMN LAYOUT -->
                 <div id="email-search-results" class="grid grid-cols-1 gap-6"></div>
             </div>
         </div>
@@ -291,7 +338,6 @@
                     </h3>
                 </div>
                 <p class="text-sm text-slate-500 mb-4 bg-yellow-50 text-yellow-800 p-3 rounded border border-yellow-200 flex gap-2 items-start"><i class="fas fa-info-circle mt-0.5"></i> Note: For external modules, you may need to manually re-upload the image on the corresponding website due to browser security restrictions.</p>
-                <!-- 1 COLUMN LAYOUT -->
                 <div id="image-search-results" class="grid grid-cols-1 gap-6"></div>
             </div>
         </div>
@@ -339,8 +385,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="data.js"></script>
-    <script src="utils.js"></script>
-    <script src="main.js"></script>
+    <script src="data.js?v=2.0"></script>
+    <script src="utils.js?v=2.0"></script>
+    <script src="main.js?v=2.0"></script>
 </body>
 </html>
