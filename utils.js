@@ -62,16 +62,24 @@ function createCategoryCard(category) {
     return container;
 }
 
-function createSearchLink(query, isDirectUrl = false) {
+function createSearchLink(query, isDirectUrl = false, engineName = "Google") {
     const link = document.createElement('a');
-    if (isDirectUrl) {
-        link.href = query;
-    } else {
-        link.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    let finalUrl = query;
+    if (!isDirectUrl) {
+        if (engineName === "Shodan") {
+            finalUrl = `https://www.shodan.io/search?query=${encodeURIComponent(query)}`;
+        } else if (engineName === "FOFA") {
+            // FOFA requires base64 encoding for search
+            finalUrl = `https://fofa.info/result?qbase64=${btoa(query)}`;
+        } else {
+            finalUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        }
     }
     
+    link.href = finalUrl;
     link.textContent = query;
     link.className = 'block w-full break-all text-slate-600 hover:text-primary-700 bg-white border border-slate-200 hover:border-primary-300 rounded-lg p-3 text-sm font-mono transition-colors shadow-sm hover:shadow';
     link.target = '_blank';
+
     return link;
 }
